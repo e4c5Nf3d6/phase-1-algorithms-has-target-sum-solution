@@ -1,17 +1,30 @@
 function hasTargetSum(array, target) {
-  // Write your algorithm here
+  const checkedNumbers = new Set();
+  for (const number of array) {
+    const difference = target - number;
+    if (checkedNumbers.has(difference)) return true;
+    checkedNumbers.add(number);
+  }
+  return false
 }
 
 /* 
-  Write the Big O time complexity of your function here
+  O(n)
 */
 
 /* 
-  Add your pseudocode here
+  Create a set to store all of the numbers we have checked
+  iterate over the array of numbers
+    for the current number, find the difference between the number and the target
+    check if any of the numbers in the set are equal to the difference
+      if yes, return true
+    add the current number to the set
+  return false
 */
 
 /*
-  Add written explanation of your solution here
+hasTargetSum checks if the sum of any two numbers in an array equals a target number.
+It returns true if yes, false if no. 
 */
 
 // You can run `node index.js` to view these console logs
@@ -29,6 +42,21 @@ if (require.main === module) {
 
   console.log("Expecting: false");
   console.log("=>", hasTargetSum([1, 2, 5], 4));
+
+  console.log("");
+
+  console.log("Expecting: true");
+  console.log("=>", hasTargetSum([-10, 1, 5], -9));
+  
+  console.log("");
+
+  console.log("Expecting: true");
+  console.log("=>", hasTargetSum([0, 0, 5], 0));
+
+  console.log("");
+
+  console.log("Expecting: false");
+  console.log("=>", hasTargetSum([4], 4));
 }
 
 module.exports = hasTargetSum;
